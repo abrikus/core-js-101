@@ -238,8 +238,13 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  const result = [];
+  arr.reduce((acc, val, ind) => {
+    result[ind] = acc + val;
+    return result[ind];
+  }, 0);
+  return result;
 }
 
 /**
@@ -454,8 +459,14 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = new Array(n).fill(0);
+  const buildArr = arr.map((item, ind) => {
+    const anotherArr = new Array(n).fill(0);
+    anotherArr[ind] = 1;
+    return anotherArr;
+  });
+  return buildArr;
 }
 
 /**
@@ -521,8 +532,18 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const out = array.reduce(
+    (acc, value) => {
+      const key = keySelector(value);
+      const item = valueSelector(value);
+      const mapArr = acc.get(key);
+      if (mapArr) { mapArr.push(item); } else { acc.set(key, [item]); }
+      return acc;
+    },
+    new Map(),
+  );
+  return out;
 }
 
 
