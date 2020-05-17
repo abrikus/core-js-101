@@ -272,8 +272,9 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(array) {
+  const ar = array.map((item, index) => new Array(index + 1).fill(item));
+  return ar.flat();
 }
 
 
@@ -308,8 +309,9 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  const numbers = arr.filter((item) => typeof item !== 'string');
+  return numbers.filter((item) => item > 0).length;
 }
 
 /**
@@ -469,8 +471,9 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  const startArray = new Array(end - start + 1).fill(start);
+  return startArray.map((item, index) => item + index);
 }
 
 /**
@@ -554,8 +557,13 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  let firstArray = arr;
+  indexes.map((item) => {
+    firstArray = firstArray[item];
+    return item;
+  });
+  return firstArray;
 }
 
 
